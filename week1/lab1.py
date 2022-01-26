@@ -1,6 +1,3 @@
-from fastapi import status
-
-
 class Human:
     def __init__(self, name, age, weight, height, vaccine_selection, hospital_selection):
         self.name = name
