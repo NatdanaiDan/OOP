@@ -9,11 +9,11 @@ class Human:
 
 
 class Hospital:
+
     def __init__(self, Moderna_vaccine, Pfizer_vaccine):
         self.Moderna_vaccine = Moderna_vaccine
         self.Pfizer_vaccine = Pfizer_vaccine
         self.records = []
-# True pfizer false modern
 
 
 def vaccine_stock(hospital_selection):
