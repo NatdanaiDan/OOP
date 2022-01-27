@@ -91,7 +91,7 @@ def readrecord():
         print(f"{record.name} {record.age} {record.weight} {record.height} {record.vaccine_selection} {record.hospital_selection}")
 
 
-Hospital_A = Hospital(3, 3)
+Hospital_A = Hospital(3, 2)
 Hospital_B = Hospital(2, 0)
 Hospital_C = Hospital(0, 3)
 
