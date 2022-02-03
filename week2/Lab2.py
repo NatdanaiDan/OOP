@@ -1,3 +1,4 @@
+import re
 class Author():
     def __init__(self, name):
         self._name = name
@@ -5,6 +6,9 @@ class Author():
     @property
     def name(self):
         return self._name
+
+
+
 
 
 class Book():
@@ -15,9 +19,15 @@ class Book():
         self._Author = Author
         self._Title = Title
         self._Subject = Subject
-        self._DDS = DDS
+        self._DDS = self.checkDDS(DDS)
 
         Book.ISBN_runner += 1
+
+    def checkDDS(self,value):
+        if len(str(value)) != 3:
+            print("DDS must be a number and only have 3 digit")
+        else:
+            self._DDS = value
 
     @property
     def ISBN(self):
@@ -34,14 +44,18 @@ class Book():
     @property
     def Title(self):
         return self._Title
+    
 
     @property
     def Subject(self):
         return self._Subject
-
+    
     @property
     def DDS(self):
         return self._DDS
+    @DDS.setter
+    def DDS(self, value):
+        self.checkDDS(value)
 
 
 class Catalog():
@@ -142,15 +156,8 @@ Author1 = Author("A")
 Author2 = Author("B")
 BookA = Book([Author1, Author2], "Abook1", "Language", 400)
 BookB = Book([Author2], "Abook2", "Language", 400)
-
-print(BookA._Author[0].name)
-print(BookB._Author[0].name)
 libraryA = Catalog()
 libraryA.add_book(BookA)
 libraryA.add_book(BookB)
-# print(libraryA.Books)
-# # libraryA.del_book()
-# print(libraryA.Books)
-# libraryA.search_book()
 libraryA.add_book_to_catalog()
 libraryA.search_book()
