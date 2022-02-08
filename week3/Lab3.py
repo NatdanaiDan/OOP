@@ -45,10 +45,16 @@ class Notebook:
 
     def search_notes(self, filter):
         if isinstance(filter, str):
+            counter=0
+            print("*" * 10)
             for note in self.notes:
-                print("*" * 10)
                 if note.match(filter):
                     print(f"Note : {note._ID}")
+                else:
+                    counter += 1
+                if counter == len(self.notes):
+                    print("No notes found\nTry again")
+
         else:
             print("filter must be string")
 
@@ -57,8 +63,7 @@ class Menu:
     def __init__(self):
         self.notebook = Notebook()
 
-    # shownote use id parameter to select note
-
+    # shownote use id parameter to select note and can check is empty same    
     def show_note(self, note_id):
         for note in self.notebook.notes:
             if note._ID == note_id:
@@ -75,7 +80,6 @@ class Menu:
         self.notebook.search_notes(value)
 
     def add_note(self, memo, tags):
-        print(self.notebook)
         self.notebook.new_note(memo, tags)
 
     def modify_note(self, note_id, memo):
@@ -91,7 +95,8 @@ class Menu:
 
 # loop use class menu to run
 menu = Menu()
-
+menu.add_note("first note", ["first", "test"])
+menu.add_note("second note", ["second", "test"])
 while True:
     print(
         """
