@@ -45,7 +45,7 @@ class Notebook:
 
     def search_notes(self, filter):
         if isinstance(filter, str):
-            for note in self.notebook.notes:
+            for note in self.notes:
                 print("*" * 10)
                 if note.match(filter):
                     print(f"Note : {note._ID}")
@@ -93,7 +93,8 @@ class Menu:
 menu = Menu()
 
 while True:
-    print("""
+    print(
+        """
     Notebook Menu
     1. Show Note
     2. Search Notes
@@ -101,21 +102,21 @@ while True:
     4. Modify Note
     5. Modify Tags
     6. Quit
-    """)
-    choice = input("Enter your choice: ")
-    match choice:
-        case "1":
+    """
+    )
+    select = int(input("Enter your choice: "))
+    match select:
+        case 1:
             menu.show_note(int(input("Enter note id: ")))
-        case "2":
+        case 2:
             menu.search_note(input("Enter search filter: "))
-        case "3":
-            menu.add_note(input("Enter memo: "),
-                          input("Enter tags: ").split(" "))
-        case "4":
-            menu.modify_note(int(input("Enter note id: ")),
-                             input("Enter memo: "))
-        case "5":
-            menu.modify_tags(int(input("Enter note id: ")),
-                             input("Enter tags: ").split(" "))
-        case "6":
+        case 3:
+            menu.add_note(input("Enter memo: "), input("Enter tags: ").split(" "))
+        case 4:
+            menu.modify_note(int(input("Enter note id: ")), input("Enter memo: "))
+        case 5:
+            menu.modify_tags(
+                int(input("Enter note id: ")), input("Enter tags: ").split(" ")
+            )
+        case 6:
             menu.quit()
