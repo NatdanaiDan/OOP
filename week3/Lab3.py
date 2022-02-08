@@ -100,16 +100,19 @@ while True:
     6. Quit
     """)
     choice = input("Enter your choice: ")
-    if choice == "1":
-        menu.show_note(int(input("Enter note id: ")))
-    elif choice == "2":
-        menu.search_note(input("Enter search filter: "))
-    elif choice == "3":
-        menu.add_note(input("Enter memo: "), input("Enter tags: ").split(" "))
-    elif choice == "4":
-        menu.modify_note(int(input("Enter note id: ")), input("Enter memo: "))
-    elif choice == "5":
-        menu.modify_tags(int(input("Enter note id: ")),
-                         input("Enter tags: ").split(" "))
-    elif choice == "6":
-        menu.quit()
+    match choice:
+        case "1":
+            menu.show_note(int(input("Enter note id: ")))
+        case "2":
+            menu.search_note(input("Enter search filter: "))
+        case "3":
+            menu.add_note(input("Enter memo: "),
+                          input("Enter tags: ").split(" "))
+        case "4":
+            menu.modify_note(int(input("Enter note id: ")),
+                             input("Enter memo: "))
+        case "5":
+            menu.modify_tags(int(input("Enter note id: ")),
+                             input("Enter tags: ").split(" "))
+        case "6":
+            menu.quit()
