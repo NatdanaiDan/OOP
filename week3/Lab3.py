@@ -46,6 +46,7 @@ class Notebook:
     def search_notes(self, filter):
         if isinstance(filter, str):
             for note in self.notebook.notes:
+                print("*" * 10)
                 if note.match(filter):
                     print(f"Note : {note._ID}")
         else:
@@ -61,9 +62,11 @@ class Menu:
     def show_note(self, note_id):
         for note in self.notebook.notes:
             if note._ID == note_id:
-                print(f"Note ID : {note._ID}")
+                print("*" * 10)
+                print(f"\nNote ID : {note._ID}")
                 print(f"Memo : {note.memo}")
-                print(f"Tags : {note._tags}")
+                print(f"Tags : {note._tags}\n")
+                print("*" * 10)
                 break
         else:
             print("No note with that id")
@@ -82,7 +85,7 @@ class Menu:
         self.notebook.modify_tags(note_id, tags)
 
     def quit(self):
-        print("Thank you for using your notebook today.")
+        print("Ok, goodbye")
         exit()
 
 
@@ -92,7 +95,7 @@ menu = Menu()
 while True:
     print("""
     Notebook Menu
-    1. Show all Notes
+    1. Show Note
     2. Search Notes
     3. Add Note
     4. Modify Note
