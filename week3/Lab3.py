@@ -99,12 +99,12 @@ class Menu:
         if check:
             for note in self.notebook.notes:
                 if note.ID == note_id:
-                    print("*" * 10)
+                    print("*" * 5)
                     print(f"\nNote ID : {note.ID}")
                     print(f"Timestamp : {note.creation_date}")
                     print(f"Memo : {note.memo}")
                     print(f"Tags : {note.tag}\n")
-                    print("*" * 10)
+                    print("*" * 5)
                     break
             else:
                 Menu.red_print("No note with that id")
