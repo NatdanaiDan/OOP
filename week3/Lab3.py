@@ -17,7 +17,11 @@ class Note:
         Note.ID_count += 1
 
     def match(self, search_filter):
-        return search_filter in self.memo or search_filter in self._tags
+        return search_filter in self.memo or search_filter in self.tag
+    
+    @property
+    def creation_date(self):
+        return self._creation_date
     
     @property
     def tag(self):
@@ -69,7 +73,7 @@ class Notebook:
             print("*" * 10)
             for note in self.notes:
                 if note.match(filter):
-                    print(f"Note ID : {note._ID}")
+                    print(f"Note ID : {note.ID}")
                 else:
                     counter += 1
                 if counter == len(self.notes):
@@ -81,9 +85,9 @@ class Notebook:
     def success_edit(self, note):
         print("\n"+("*" * 10)+"\n")
         Menu.green_print("Note modified successfully")
-        print(f"Note ID : {note._ID}")
+        print(f"Note ID : {note.ID}")
         print(f"Memo : {note.memo}")
-        print(f"Tags : {note._tags}\n")
+        print(f"Tags : {note.tag}\n")
 
 
 
@@ -96,9 +100,10 @@ class Menu:
             for note in self.notebook.notes:
                 if note.ID == note_id:
                     print("*" * 10)
-                    print(f"\nNote ID : {note._ID}")
+                    print(f"\nNote ID : {note.ID}")
+                    print(f"Timestamp : {note.creation_date}")
                     print(f"Memo : {note.memo}")
-                    print(f"Tags : {note._tags}\n")
+                    print(f"Tags : {note.tag}\n")
                     print("*" * 10)
                     break
             else:
@@ -124,7 +129,7 @@ class Menu:
         if value.isnumeric():
             return int(value),True
         else:
-            Menu.red_print(star+"ID must be integer"+star)
+            Menu.red_print(star+"ID must be Number"+star)
             return value,False
 
     @staticmethod
@@ -138,6 +143,7 @@ class Menu:
 menu = Menu()
 menu.add_note("first note", ["first", "test"])
 menu.add_note("second note", ["second", "test"])
+print("add sample note")
 while True:
     print(
         """
