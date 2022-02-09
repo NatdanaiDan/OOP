@@ -1,5 +1,8 @@
 import datetime
-from unicodedata import numeric
+CRED = '\033[91m'
+CEND = '\033[0m'
+CGREEN = '\033[92m'
+star = '*'*10
 
 
 class Note:
@@ -37,25 +40,28 @@ class Notebook:
     def new_note(self, memo, tags):
         if isinstance(memo, str) and isinstance(tags, list):
             self.notes.append(Note(memo, tags))
+            Menu.green_print("Note added successfully")
         else:
-            print("memo and tags must be string and list")
+            Menu.red_print("Memo and tags must be string")
 
     def modify_memo(self, note_id, memo):
         for note in self.notes:
-            if self.ID == note_id:
+            if note.ID == note_id:
                 note.memo = memo
+                self.success_edit(note)
                 break
         else:
-            print("no note with that id")
+            Menu.red_print("No note with that id")
 
     def modify_tags(self, note_id, tags):
         if isinstance(tags, list):
             for note in self.notes:
                 if note.ID == note_id:
                     note.tag = tags
+                    self.success_edit(note)
                     break
             else:
-                print("no note with that id")
+                Menu.red_print("No note with that id")
 
     def search_notes(self, filter):
         if isinstance(filter, str):
@@ -63,24 +69,30 @@ class Notebook:
             print("*" * 10)
             for note in self.notes:
                 if note.match(filter):
-                    print(f"Note : {note._ID}")
+                    print(f"Note ID : {note._ID}")
                 else:
                     counter += 1
                 if counter == len(self.notes):
-                    print("No notes found\nTry again")
+                    Menu.red_print("No notes found")
 
         else:
-            print("filter must be string")
+            Menu.red_print("Filter must be string")
+
+    def success_edit(self, note):
+        print("\n"+("*" * 10)+"\n")
+        Menu.green_print("Note modified successfully")
+        print(f"Note ID : {note._ID}")
+        print(f"Memo : {note.memo}")
+        print(f"Tags : {note._tags}\n")
+
 
 
 class Menu:
     def __init__(self):
         self.notebook = Notebook()
-
-    # shownote use id parameter to select note and can check is empty same    
     def show_note(self, note_id):
-        if note_id.isnumeric():
-            note_id=int(note_id)
+        note_id,check=self.change_str_toint(note_id)
+        if check:
             for note in self.notebook.notes:
                 if note.ID == note_id:
                     print("*" * 10)
@@ -90,9 +102,7 @@ class Menu:
                     print("*" * 10)
                     break
             else:
-                print("No note with that id")
-        else:
-            print("ID must be number")
+                Menu.red_print("No note with that id")
 
     def search_note(self, value):
         self.notebook.search_notes(value)
@@ -105,12 +115,25 @@ class Menu:
 
     def modify_tags(self, note_id, tags):
         self.notebook.modify_tags(note_id, tags)
-
     def quit(self):
         print("Ok, goodbye")
         exit()
 
+    @staticmethod
+    def change_str_toint(value):
+        if value.isnumeric():
+            return int(value),True
+        else:
+            Menu.red_print(star+"ID must be integer"+star)
+            return value,False
 
+    @staticmethod
+    def red_print(value):
+        print(CRED+value+CEND)
+
+    @staticmethod
+    def green_print(value):
+        print(CGREEN+value+CEND)
 # loop use class menu to run
 menu = Menu()
 menu.add_note("first note", ["first", "test"])
@@ -134,14 +157,20 @@ while True:
         case "2":
             menu.search_note(input("Enter search filter: "))
         case "3":
-            menu.add_note(input("Enter memo: "), input("Enter tags: ").split(" "))
+            print("**********Use spacebar when you need to more than 1 tags**********")
+
+            menu.add_note(input("Enter memo: "), input("Enter tags: ").split())
         case "4":
-            menu.modify_note(int(input("Enter note id: ")), input("Enter memo: "))
+            note_id=input("Enter note id: ")
+            note_id,check=menu.change_str_toint(note_id)
+            if check:
+                menu.modify_note(note_id, input("Enter memo: "))
         case "5":
             print("**********Use spacebar when you need to more than 1 tags**********")
-            menu.modify_tags(
-                int(input("Enter note id: ")), input("Enter tags: ").split(" ")
-                )
+            note_id=input("Enter note id: ")
+            note_id,check=menu.change_str_toint(note_id)
+            if check:
+                menu.modify_tags(note_id, input("Enter tags: ").split())
         case "6":
             menu.quit()
         case _:
