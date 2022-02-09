@@ -1,4 +1,5 @@
 import datetime
+from unicodedata import numeric
 
 
 class Note:
@@ -14,11 +15,24 @@ class Note:
 
     def match(self, search_filter):
         return search_filter in self.memo or search_filter in self._tags
+    
+    @property
+    def tag(self):
+        return self._tags
+    
+    @property
+    def ID(self):
+        return self._ID
+
+    @tag.setter
+    def tag(self, value):
+        self._tags=value
 
 
 class Notebook:
     def __init__(self):
         self.notes = []
+    
 
     def new_note(self, memo, tags):
         if isinstance(memo, str) and isinstance(tags, list):
@@ -28,7 +42,7 @@ class Notebook:
 
     def modify_memo(self, note_id, memo):
         for note in self.notes:
-            if note._ID == note_id:
+            if self.ID == note_id:
                 note.memo = memo
                 break
         else:
@@ -37,8 +51,8 @@ class Notebook:
     def modify_tags(self, note_id, tags):
         if isinstance(tags, list):
             for note in self.notes:
-                if note._ID == note_id:
-                    note._tags = tags
+                if note.ID == note_id:
+                    note.tag = tags
                     break
             else:
                 print("no note with that id")
@@ -65,16 +79,20 @@ class Menu:
 
     # shownote use id parameter to select note and can check is empty same    
     def show_note(self, note_id):
-        for note in self.notebook.notes:
-            if note._ID == note_id:
-                print("*" * 10)
-                print(f"\nNote ID : {note._ID}")
-                print(f"Memo : {note.memo}")
-                print(f"Tags : {note._tags}\n")
-                print("*" * 10)
-                break
+        if note_id.isnumeric():
+            note_id=int(note_id)
+            for note in self.notebook.notes:
+                if note.ID == note_id:
+                    print("*" * 10)
+                    print(f"\nNote ID : {note._ID}")
+                    print(f"Memo : {note.memo}")
+                    print(f"Tags : {note._tags}\n")
+                    print("*" * 10)
+                    break
+            else:
+                print("No note with that id")
         else:
-            print("No note with that id")
+            print("ID must be number")
 
     def search_note(self, value):
         self.notebook.search_notes(value)
@@ -109,19 +127,22 @@ while True:
     6. Quit
     """
     )
-    select = int(input("Enter your choice: "))
+    select = input("Enter your choice: ")
     match select:
-        case 1:
-            menu.show_note(int(input("Enter note id: ")))
-        case 2:
+        case "1":
+            menu.show_note(input("Enter note id: "))
+        case "2":
             menu.search_note(input("Enter search filter: "))
-        case 3:
+        case "3":
             menu.add_note(input("Enter memo: "), input("Enter tags: ").split(" "))
-        case 4:
+        case "4":
             menu.modify_note(int(input("Enter note id: ")), input("Enter memo: "))
-        case 5:
+        case "5":
+            print("**********Use spacebar when you need to more than 1 tags**********")
             menu.modify_tags(
                 int(input("Enter note id: ")), input("Enter tags: ").split(" ")
-            )
-        case 6:
+                )
+        case "6":
             menu.quit()
+        case _:
+            print("**********Your selection is not in Menu***********")
