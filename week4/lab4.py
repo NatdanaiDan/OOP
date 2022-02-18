@@ -80,7 +80,6 @@ class Apartment(Property):
 
 class Rental:
     def __init__(self, furnished, rent, **kwargs):
-        super().__init__(**kwargs)
         self.furnished = furnished
         self.rent = rent
 
@@ -96,7 +95,6 @@ class Rental:
 
 class Purchase:
     def __init__(self, price, taxes, **kwargs):
-        super().__init__(**kwargs)
         self.price = price
         self.taxes = taxes
 
@@ -111,6 +109,10 @@ class Purchase:
 
 
 class HouseRental(House, Rental):
+    def __init__(self, **kwargs):
+        House.__init__(self, **kwargs)
+        Rental.__init__(self, **kwargs)
+
     @staticmethod
     def prompt_init():
         return (House.prompt_init() | Rental.prompt_init())
@@ -121,6 +123,11 @@ class HouseRental(House, Rental):
 
 
 class HousePurchase(House, Purchase):
+
+    def __init__(self, **kwargs):
+        House.__init__(self, **kwargs)
+        Purchase.__init__(self, **kwargs)
+
     @staticmethod
     def prompt_init():
         return (House.prompt_init()) | (Purchase.prompt_init())
@@ -131,6 +138,10 @@ class HousePurchase(House, Purchase):
 
 
 class ApartmentRental(Apartment, Rental):
+    def __init__(self, **kwargs):
+        Apartment.__init__(self, **kwargs)
+        Rental.__init__(self, **kwargs)
+
     @staticmethod
     def prompt_init():
         return (Apartment.prompt_init()) | (Rental.prompt_init())
@@ -141,6 +152,10 @@ class ApartmentRental(Apartment, Rental):
 
 
 class ApartmentPurchase(Apartment, Purchase):
+    def __init__(self, **kwargs):
+        Apartment.__init__(self, **kwargs)
+        Purchase.__init__(self, **kwargs)
+
     @staticmethod
     def prompt_init():
         return (Apartment.prompt_init()) | (Purchase.prompt_init())
@@ -152,3 +167,4 @@ class ApartmentPurchase(Apartment, Purchase):
 
 A1 = Agent()
 A1.add_property()
+A1.list_properties()

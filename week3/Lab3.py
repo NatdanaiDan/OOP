@@ -18,28 +18,27 @@ class Note:
 
     def match(self, search_filter):
         return search_filter in self.memo or search_filter in self.tag
-    
+
     @property
     def creation_date(self):
         return self._creation_date
-    
+
     @property
     def tag(self):
         return self._tags
-    
+
     @property
     def ID(self):
         return self._ID
 
     @tag.setter
     def tag(self, value):
-        self._tags=value
+        self._tags = value
 
 
 class Notebook:
     def __init__(self):
         self.notes = []
-    
 
     def new_note(self, memo, tags):
         if isinstance(memo, str) and isinstance(tags, list):
@@ -69,7 +68,7 @@ class Notebook:
 
     def search_notes(self, filter):
         if isinstance(filter, str):
-            counter=0
+            counter = 0
             print("*" * 10)
             for note in self.notes:
                 if note.match(filter):
@@ -90,12 +89,12 @@ class Notebook:
         print(f"Tags : {note.tag}\n")
 
 
-
 class Menu:
     def __init__(self):
         self.notebook = Notebook()
+
     def show_note(self, note_id):
-        note_id,check=self.change_str_toint(note_id)
+        note_id, check = self.change_str_toint(note_id)
         if check:
             for note in self.notebook.notes:
                 if note.ID == note_id:
@@ -120,6 +119,7 @@ class Menu:
 
     def modify_tags(self, note_id, tags):
         self.notebook.modify_tags(note_id, tags)
+
     def quit(self):
         print("Ok, goodbye")
         exit()
@@ -127,10 +127,10 @@ class Menu:
     @staticmethod
     def change_str_toint(value):
         if value.isnumeric():
-            return int(value),True
+            return int(value), True
         else:
             Menu.red_print(star+"ID must be Number"+star)
-            return value,False
+            return value, False
 
     @staticmethod
     def red_print(value):
@@ -139,6 +139,8 @@ class Menu:
     @staticmethod
     def green_print(value):
         print(CGREEN+value+CEND)
+
+
 # loop use class menu to run
 menu = Menu()
 menu.add_note("first note", ["first", "test"])
@@ -167,14 +169,14 @@ while True:
 
             menu.add_note(input("Enter memo: "), input("Enter tags: ").split())
         case "4":
-            note_id=input("Enter note id: ")
-            note_id,check=menu.change_str_toint(note_id)
+            note_id = input("Enter note id: ")
+            note_id, check = menu.change_str_toint(note_id)
             if check:
                 menu.modify_note(note_id, input("Enter memo: "))
         case "5":
             print("**********Use spacebar when you need to more than 1 tags**********")
-            note_id=input("Enter note id: ")
-            note_id,check=menu.change_str_toint(note_id)
+            note_id = input("Enter note id: ")
+            note_id, check = menu.change_str_toint(note_id)
             if check:
                 menu.modify_tags(note_id, input("Enter tags: ").split())
         case "6":
