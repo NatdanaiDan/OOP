@@ -4,7 +4,7 @@ list_no = ["no", "n", "nah", "nope", "not", "never"]
 
 class Agent:
     def __init__(self):
-        self.property_list = []
+        self._property_list = []
 
     def add_property(self):
         type_map = {("house", "rental"): HouseRental,
@@ -16,17 +16,17 @@ class Agent:
         type_selection = type_map[(property_type, property_status)]
         dict_final = type_selection.prompt_init()
         print(dict_final)
-        self.property_list.append(type_selection(**dict_final))
+        self._property_list.append(type_selection(**dict_final))
 
     def list_properties(self, show_all=False):
         if show_all:
-            for property in self.property_list:
+            for property in self._property_list:
                 print(property)
         else:
             id = int(input("Enter property ID: "))
-            for property in self.property_list:
+            for property in self._property_list:
                 if property.ID == id:
-                    print(property.display())
+                    property.display()
 
     @staticmethod
     def yn_convertor(choice):
@@ -53,6 +53,7 @@ class Property:
         return self._property_id
 
     def display(self):
+        print("ID property"+str(self.ID))
         print("square_Metres:", self.square_Metres)
         print("num_bedrooms:", self.num_bedrooms)
         print("num_bathrooms:", self.num_bathrooms)
