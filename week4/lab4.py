@@ -106,7 +106,6 @@ class Purchase:
                     taxes=input("Enter the taxes: "))
 
     def display(self):
-        super().display()
         print(f"price: {self.price}")
         print(f"taxes: {self.taxes}")
 
@@ -116,11 +115,19 @@ class HouseRental(House, Rental):
     def prompt_init():
         return (House.prompt_init() | Rental.prompt_init())
 
+    def display(self):
+        House.display(self)
+        Rental.display(self)
+
 
 class HousePurchase(House, Purchase):
     @staticmethod
     def prompt_init():
         return (House.prompt_init()) | (Purchase.prompt_init())
+
+    def display(self):
+        House.display(self)
+        Purchase.display(self)
 
 
 class ApartmentRental(Apartment, Rental):
@@ -128,11 +135,19 @@ class ApartmentRental(Apartment, Rental):
     def prompt_init():
         return (Apartment.prompt_init()) | (Rental.prompt_init())
 
+    def display(self):
+        Apartment.display(self)
+        Rental.display(self)
+
 
 class ApartmentPurchase(Apartment, Purchase):
     @staticmethod
     def prompt_init():
         return (Apartment.prompt_init()) | (Purchase.prompt_init())
+
+    def display(self):
+        Apartment.display(self)
+        Purchase.display(self)
 
 
 A1 = Agent()
