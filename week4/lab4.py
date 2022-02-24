@@ -13,8 +13,7 @@ class Agent:
                     ("apartment", "purchase"): ApartmentPurchase}
         property_type = input("Enter property type: ")
         property_status = input("Enter property status: ")
-        type_selection = type_map[(property_type, property_status)]
-        dict_final = type_selection.prompt_init()
+        dict_final = type_map[(property_type, property_status)].prompt_init()
         print(dict_final)
         self._property_list.append(type_selection(**dict_final))
 
