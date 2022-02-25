@@ -217,9 +217,9 @@ class ApartmentPurchase(Apartment, Purchase):
 
 A1 = Agent()
 A1.add_property("house", "rental")
-# A1.add_property("house", "purchase")
-# A1.add_property("apartment", "rental")
-# A1.add_property("apartment", "purchase")
+A1.add_property("house", "purchase")
+A1.add_property("apartment", "rental")
+A1.add_property("apartment", "purchase")
 
 A1.list_properties(True)
 A1.list_properties()
