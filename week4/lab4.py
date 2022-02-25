@@ -6,26 +6,30 @@ class Agent:
     def __init__(self):
         self._property_list = []
 
-    def add_property(self):
+    def add_property(self, property_type, property_status):
         type_map = {("house", "rental"): HouseRental,
                     ("house", "purchase"): HousePurchase,
                     ("apartment", "rental"): ApartmentRental,
                     ("apartment", "purchase"): ApartmentPurchase}
-        property_type = input("Enter property type: ")
-        property_status = input("Enter property status: ")
-        dict_final = type_map[(property_type, property_status)].prompt_init()
+        type_selection = type_map[(property_type, property_status)]
+        dict_final = type_selection.prompt_init()
         print(dict_final)
         self._property_list.append(type_selection(**dict_final))
 
     def list_properties(self, show_all=False):
         if show_all:
             for property in self._property_list:
-                print(property)
+                print("*"*20)
+                property.display()
+                print("*"*20)
         else:
             id = int(input("Enter property ID: "))
             for property in self._property_list:
                 if property.ID == id:
                     property.display()
+                    break
+            else:
+                print("Property not found")
 
     @staticmethod
     def yn_convertor(choice):
@@ -52,10 +56,10 @@ class Property:
         return self._property_id
 
     def display(self):
-        print("ID property"+str(self.ID))
-        print("square_Metres:", self.square_Metres)
-        print("num_bedrooms:", self.num_bedrooms)
-        print("num_bathrooms:", self.num_bathrooms)
+        print("ID property "+str(self.ID))
+        print("square_Metres: ", self.square_Metres)
+        print("num_bedrooms: ", self.num_bedrooms)
+        print("num_bathrooms: ", self.num_bathrooms)
 
     def prompt_init():
         while True:
@@ -212,5 +216,10 @@ class ApartmentPurchase(Apartment, Purchase):
 
 
 A1 = Agent()
-A1.add_property()
+A1.add_property("house", "rental")
+# A1.add_property("house", "purchase")
+# A1.add_property("apartment", "rental")
+# A1.add_property("apartment", "purchase")
+
+A1.list_properties(True)
 A1.list_properties()
