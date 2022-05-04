@@ -105,8 +105,24 @@ class Taskdeleted(Bucket):
     pass
 
 
-class List:
+class Movetask:
+    def move_to_task_deleted(self, task):
+        self._task_deleted.task_list.append(task)
+
+    def move_to_task_finished(self, task):
+        self._task_finished.task_list.append(task)
+
+    def move_to_task_highlight(self, task):
+        self._task_highlight.task_list.append(task)
+
+    def move_to_task_normal(self, task):
+        self._task_normal.task_list.append(task)
+
+
+###เดี่ยวมา หาวิธีเอาออกจาก list ตัวเอง
+class List(Movetask):
     def __init__(self, title):
+        self._dict
         self._tile = title
         self._task_normal = Tasknormal()
         self._task_finished = Taskfinished()
@@ -138,34 +154,22 @@ class List:
         return self._task_deleted
 
     def add_task(self, name):
-        self._task_normal.task_list.append(Task(name))
-
-    def delete_to_normal(self, task):
-        self._task_normal.task_list.append(task)
-        self._task_deleted.remove_task(task)
-
-    def highlight_to_normal(self, task):
-        self._task_normal.task_list.append(task)
-        self._task_highlight.remove_task(task)
-
-    def finished_to_normal(self, task):
-        self._task_normal.task_list.append(task)
-        self._task_finished.remove_task(task)
-
-    def normal_to_highlight(self, task):
-        self._task_highlight.task_list.append(task)
-        self._task_normal.remove_task(task)
-
-    def normal_to_finished(self, task):
-        self._task_finished.task_list.append(task)
-        self._task_normal.remove_task(task)
-
-    def normal_to_deleted(self, task):
-        self._task_deleted.task_list.append(task)
-        self._task_normal.remove_task(task)
+        self.task_normal.task_list.append(Task(name))
 
 
 list1 = List("list1")
 list1.add_task("task1")
 list1.add_task("task2")
-print(list1.task_normal.task_list)
+x = list1.task_normal.task_list[0]
+list1.move_to_task_deleted(x)
+import json
+from json import JSONEncoder
+
+
+class EmployeeEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
+employeeJSONData = json.dumps(list1, indent=4, cls=EmployeeEncoder)
+print(employeeJSONData)
