@@ -119,7 +119,11 @@ class Movetask:
         self._task_normal.task_list.append(task)
 
 
-###เดี่ยวมา หาวิธีเอาออกจาก list ตัวเอง
+"""
+เดี่ยวมา หาวิธีเอาออกจาก list ตัวเอง
+"""
+
+
 class List(Movetask):
     def __init__(self, title):
         self._dict
