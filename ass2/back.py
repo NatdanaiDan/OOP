@@ -77,24 +77,32 @@ class Task:
                 break
 
 
-class Tasknormal:
+class Bucket:
     def __init__(self):
         self._task_list = []
 
+    def remove_task(self, task):
+        self.task_list.remove(task)
 
-class Taskfinished:
-    def __init__(self):
-        self._task_list = []
-
-
-class Taskhighlight:
-    def __init__(self):
-        self._task_list = []
+    @property
+    def task_list(self):
+        return self._task_list
 
 
-class Taskdeleted:
-    def __init__(self):
-        self._task_list = []
+class Tasknormal(Bucket):
+    pass
+
+
+class Taskfinished(Bucket):
+    pass
+
+
+class Taskhighlight(Bucket):
+    pass
+
+
+class Taskdeleted(Bucket):
+    pass
 
 
 class List:
@@ -113,5 +121,51 @@ class List:
     def title(self, title):
         self._title = title
 
-    def add_task(self, task):
-        self._task_normal.add_task(task)
+    @property
+    def task_normal(self):
+        return self._task_normal
+
+    @property
+    def task_finished(self):
+        return self._task_finished
+
+    @property
+    def task_highlight(self):
+        return self._task_highlight
+
+    @property
+    def task_deleted(self):
+        return self._task_deleted
+
+    def add_task(self, name):
+        self._task_normal.task_list.append(Task(name))
+
+    def delete_to_normal(self, task):
+        self._task_normal.task_list.append(task)
+        self._task_deleted.remove_task(task)
+
+    def highlight_to_normal(self, task):
+        self._task_normal.task_list.append(task)
+        self._task_highlight.remove_task(task)
+
+    def finished_to_normal(self, task):
+        self._task_normal.task_list.append(task)
+        self._task_finished.remove_task(task)
+
+    def normal_to_highlight(self, task):
+        self._task_highlight.task_list.append(task)
+        self._task_normal.remove_task(task)
+
+    def normal_to_finished(self, task):
+        self._task_finished.task_list.append(task)
+        self._task_normal.remove_task(task)
+
+    def normal_to_deleted(self, task):
+        self._task_deleted.task_list.append(task)
+        self._task_normal.remove_task(task)
+
+
+list1 = List("list1")
+list1.add_task("task1")
+list1.add_task("task2")
+print(list1.task_normal.task_list)
