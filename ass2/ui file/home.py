@@ -19,11 +19,16 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.left_top_line = QtWidgets.QFrame(self.centralwidget)
         self.left_top_line.setGeometry(QtCore.QRect(20, 40, 181, 16))
-        self.left_top_line.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";\n"
-"font: 48pt \"MS Shell Dlg 2\";")
+        self.left_top_line.setStyleSheet(
+            'font: 20pt "MS Shell Dlg 2";\n' 'font: 48pt "MS Shell Dlg 2";'
+        )
         self.left_top_line.setFrameShape(QtWidgets.QFrame.HLine)
         self.left_top_line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.left_top_line.setObjectName("left_top_line")
+        self.todobutton = QtWidgets.QPushButton(self.centralwidget)
+        self.todobutton.setGeometry(QtCore.QRect(20, 0, 161, 41))
+        self.todobutton.setStyleSheet('font: 20pt "MS Shell Dlg 2";')
+        self.todobutton.setObjectName("todobutton")
         self.menu_line = QtWidgets.QFrame(self.centralwidget)
         self.menu_line.setGeometry(QtCore.QRect(210, 20, 20, 581))
         self.menu_line.setFrameShape(QtWidgets.QFrame.VLine)
@@ -31,8 +36,9 @@ class Ui_MainWindow(object):
         self.menu_line.setObjectName("menu_line")
         self.left_under_line = QtWidgets.QFrame(self.centralwidget)
         self.left_under_line.setGeometry(QtCore.QRect(20, 350, 181, 16))
-        self.left_under_line.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";\n"
-"font: 48pt \"MS Shell Dlg 2\";")
+        self.left_under_line.setStyleSheet(
+            'font: 20pt "MS Shell Dlg 2";\n' 'font: 48pt "MS Shell Dlg 2";'
+        )
         self.left_under_line.setFrameShape(QtWidgets.QFrame.HLine)
         self.left_under_line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.left_under_line.setObjectName("left_under_line")
@@ -75,12 +81,8 @@ class Ui_MainWindow(object):
         self.top_line.setObjectName("top_line")
         self.highlight_label = QtWidgets.QLabel(self.centralwidget)
         self.highlight_label.setGeometry(QtCore.QRect(250, 10, 191, 41))
-        self.highlight_label.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";")
+        self.highlight_label.setStyleSheet('font: 20pt "MS Shell Dlg 2";')
         self.highlight_label.setObjectName("highlight_label")
-        self.todobutton = QtWidgets.QPushButton(self.centralwidget)
-        self.todobutton.setGeometry(QtCore.QRect(20, 0, 161, 41))
-        self.todobutton.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";")
-        self.todobutton.setObjectName("todobutton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1044, 21))
@@ -108,6 +110,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
