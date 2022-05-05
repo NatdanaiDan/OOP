@@ -19,13 +19,15 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 10, 161, 31))
-        self.label.setStyleSheet("font: 36pt \"MS Shell Dlg 2\";\n"
-"font: 20pt \"MS Shell Dlg 2\";")
+        self.label.setStyleSheet(
+            'font: 36pt "MS Shell Dlg 2";\n' 'font: 20pt "MS Shell Dlg 2";'
+        )
         self.label.setObjectName("label")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(20, 40, 181, 16))
-        self.line.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";\n"
-"font: 48pt \"MS Shell Dlg 2\";")
+        self.line.setStyleSheet(
+            'font: 20pt "MS Shell Dlg 2";\n' 'font: 48pt "MS Shell Dlg 2";'
+        )
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
@@ -36,8 +38,9 @@ class Ui_MainWindow(object):
         self.line_2.setObjectName("line_2")
         self.line_3 = QtWidgets.QFrame(self.centralwidget)
         self.line_3.setGeometry(QtCore.QRect(20, 350, 181, 16))
-        self.line_3.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";\n"
-"font: 48pt \"MS Shell Dlg 2\";")
+        self.line_3.setStyleSheet(
+            'font: 20pt "MS Shell Dlg 2";\n' 'font: 48pt "MS Shell Dlg 2";'
+        )
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
@@ -80,7 +83,7 @@ class Ui_MainWindow(object):
         self.line_4.setObjectName("line_4")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(240, 20, 81, 21))
-        self.label_3.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";")
+        self.label_3.setStyleSheet('font: 20pt "MS Shell Dlg 2";')
         self.label_3.setObjectName("label_3")
         self.pushButton_13 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_13.setGeometry(QtCore.QRect(690, 520, 75, 23))
@@ -167,7 +170,7 @@ class Ui_MainWindow(object):
         self.pushButton_15.setText(_translate("MainWindow", "delete"))
         self.pushButton_12.setText(_translate("MainWindow", "delete"))
         self.checkBox.setText(_translate("MainWindow", "complete"))
-        self.lineEdit.setText(_translate("MainWindow", "fgzdfgzsdfg"))
+        self.lineEdit.setText(_translate("MainWindow", "Enter sub task name"))
         self.pushButton_10.setText(_translate("MainWindow", "delete"))
         self.pushButton_7.setText(_translate("MainWindow", "save"))
         self.pushButton_11.setText(_translate("MainWindow", "delete"))
@@ -180,6 +183,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
