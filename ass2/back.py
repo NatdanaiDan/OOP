@@ -1,3 +1,11 @@
+class User:
+    def __init__(self):
+        self._user_list = []
+
+    def create_list(self, title):
+        self._user_list.append(List(title))
+
+
 class Subtask:
     def __init__(self, details):
         self._details = details
@@ -126,7 +134,6 @@ class Movetask:
 
 class List(Movetask):
     def __init__(self, title):
-        self._dict
         self._tile = title
         self._task_normal = Tasknormal()
         self._task_finished = Taskfinished()
@@ -161,19 +168,17 @@ class List(Movetask):
         self.task_normal.task_list.append(Task(name))
 
 
-list1 = List("list1")
-list1.add_task("task1")
-list1.add_task("task2")
-x = list1.task_normal.task_list[0]
-list1.move_to_task_deleted(x)
+user1 = User()
+user1.create_list("list1")
+
 import json
 from json import JSONEncoder
 
 
-class EmployeeEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__
+# class EmployeeEncoder(JSONEncoder):
+#     def default(self, o):
+#         return o.__dict__
 
 
-employeeJSONData = json.dumps(list1, indent=4, cls=EmployeeEncoder)
-print(employeeJSONData)
+# employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
+# print(employeeJSONData)
