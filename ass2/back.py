@@ -5,6 +5,10 @@ class User:
     def create_list(self, title):
         self._user_list.append(List(title))
 
+    @property
+    def user_list(self):
+        return self._user_list
+
 
 class Subtask:
     def __init__(self, details):
@@ -58,6 +62,7 @@ class Task:
         self._file = []
         self._description = ""
         self._due_date = None
+        self._status = "Normal"
 
     @property
     def name(self):
@@ -74,6 +79,14 @@ class Task:
     @description.setter
     def description(self, description):
         self._description = description
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        self._status = status
 
     def add_subtask(self, detail):
         self._subtasks.append(Subtask(detail))
@@ -114,27 +127,41 @@ class Taskdeleted(Bucket):
 
 
 class Movetask:
+    def get_where(self, task):
+        where = task.status
+        if where == "Normal":
+            self.task_normal.remove_task(task)
+        elif where == "Highlight":
+            self.task_highlight.remove_task(task)
+        elif where == "Finished":
+            self.task_finished.remove_task(task)
+        elif where == "Deleted":
+            self.task_deleted.remove_task(task)
+
     def move_to_task_deleted(self, task):
+        self.get_where(task)
+        task.status = "Deleted"
         self._task_deleted.task_list.append(task)
 
     def move_to_task_finished(self, task):
+        self.get_where(task)
+        task.status = "Finished"
         self._task_finished.task_list.append(task)
 
     def move_to_task_highlight(self, task):
+        self.get_where(task)
+        task.status = "Highlight"
         self._task_highlight.task_list.append(task)
 
     def move_to_task_normal(self, task):
+        self.get_where(task)
+        task.status = "Normal"
         self._task_normal.task_list.append(task)
-
-
-"""
-เดี่ยวมา หาวิธีเอาออกจาก list ตัวเอง
-"""
 
 
 class List(Movetask):
     def __init__(self, title):
-        self._tile = title
+        self._title = title
         self._task_normal = Tasknormal()
         self._task_finished = Taskfinished()
         self._task_highlight = Taskhighlight()
@@ -168,17 +195,23 @@ class List(Movetask):
         self.task_normal.task_list.append(Task(name))
 
 
-user1 = User()
-user1.create_list("list1")
+if __name__ == "__main__":
+    import json
+    from json import JSONEncoder
 
-import json
-from json import JSONEncoder
+    class EmployeeEncoder(JSONEncoder):
+        def default(self, o):
+            return o.__dict__
 
+    user1 = User()
+    user1.create_list("list1")
+    user1.user_list[0].add_task("task1")
+    user1.user_list[0].add_task("task2")
+    employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
+    print(employeeJSONData)
 
-# class EmployeeEncoder(JSONEncoder):
-#     def default(self, o):
-#         return o.__dict__
-
-
-# employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
-# print(employeeJSONData)
+    task1 = user1.user_list[0].task_normal.task_list[0]
+    user1.user_list[0].move_to_task_finished(task1)
+    user1.user_list[0].move_to_task_highlight(task1)
+    employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
+    print(employeeJSONData)

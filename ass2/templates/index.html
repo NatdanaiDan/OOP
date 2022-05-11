@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: auto;
+            max-width: 900px;
+            max-height: 500px;
+        }
+        
+        #left {
+            float: left;
+            width: 30%;
+        }
+        
+        #right {
+            float: left;
+            width: 70%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div id="left">
+            <div class="container"> To Do App</div>
+            <div class="userlist">
+                <br>
+                <table>
+                    {% include 'partials/table.html' %}
+                </table>
+            </div>
+            <form>
+                <input type="text" placeholder="Enter List Name">
+            </form>
+        </div>
+
+        <div id="right">
+            <div class="container"> TESTs</div>
+        </div>
+
+
+    </div>
+</body>
