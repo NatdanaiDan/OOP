@@ -31,38 +31,17 @@ class Subtask:
         self._status_completed = not self._status_completed
 
 
-class File:
-    def __init__(self, path):
-        self._path = path
-
-    @property
-    def path(self):
-        return self._path
-
-
-class SoundFile(File):
-    def __init__(self, path):
-        super().__init__(path)
-
-
-class ImageFile(File):
-    def __init__(self, path):
-        super().__init__(path)
-
-
-class DocumentFile(File):
-    def __init__(self, path):
-        super().__init__(path)
-
-
 class Task:
+    task_id = 1
+
     def __init__(self, name):
+        self._id = Task.task_id
         self._name = name
         self._subtasks = []
-        self._file = []
         self._description = ""
         self._due_date = None
         self._status = "Normal"
+        Task.task_id += 1
 
     @property
     def name(self):
@@ -87,6 +66,14 @@ class Task:
     @status.setter
     def status(self, status):
         self._status = status
+
+    @property
+    def subtasks(self):
+        return self._subtasks
+
+    @property
+    def id(self):
+        return self._id
 
     def add_subtask(self, detail):
         self._subtasks.append(Subtask(detail))
@@ -160,12 +147,16 @@ class Movetask:
 
 
 class List(Movetask):
+    id_list = 1
+
     def __init__(self, title):
+        self._id = List.id_list
         self._title = title
         self._task_normal = Tasknormal()
         self._task_finished = Taskfinished()
         self._task_highlight = Taskhighlight()
         self._task_deleted = Taskdeleted()
+        List.id_list += 1
 
     @property
     def title(self):
@@ -191,6 +182,10 @@ class List(Movetask):
     def task_deleted(self):
         return self._task_deleted
 
+    @property
+    def id(self):
+        return self._id
+
     def add_task(self, name):
         self.task_normal.task_list.append(Task(name))
 
@@ -205,13 +200,6 @@ if __name__ == "__main__":
 
     user1 = User()
     user1.create_list("list1")
-    user1.user_list[0].add_task("task1")
-    user1.user_list[0].add_task("task2")
-    employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
-    print(employeeJSONData)
 
-    task1 = user1.user_list[0].task_normal.task_list[0]
-    user1.user_list[0].move_to_task_finished(task1)
-    user1.user_list[0].move_to_task_highlight(task1)
     employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
     print(employeeJSONData)
