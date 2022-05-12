@@ -95,14 +95,14 @@ def edit_task_description(name: str, list_id: int, task_id: int):
 
 
 @app.get("/move_to_task_deleted")
-def move_to_task_deleted(list_id: int, task_id: int):
-    user1.move_to_task_deleted(list_id, task_id)
+def move_to_task_delet(list_id: int, task_id: int):
+    user1.move_to_task_delet(list_id, task_id)
     save_to_json(user1)
 
 
 @app.get("/move_to_task_finished")
-def move_to_task_finished(list_id: int, task_id: int):
-    user1.move_to_task_finished(list_id, task_id)
+def move_to_task_finish(list_id: int, task_id: int):
+    user1.move_to_task_finish(list_id, task_id)
     save_to_json(user1)
 
 
