@@ -2,41 +2,26 @@
     "_user_list": [
         {
             "_id": 1,
-            "_title": "test",
+            "_title": "listtest1",
             "_task_normal": {
-                "_task_list": []
-            },
-            "_task_finished": {
-                "_task_list": []
-            },
-            "_task_highlight": {
-                "_task_list": []
-            },
-            "_task_deleted": {
-                "_task_list": []
-            }
-        },
-        {
-            "_id": 2,
-            "_title": "123",
-            "_task_normal": {
-                "_task_list": []
-            },
-            "_task_finished": {
-                "_task_list": []
-            },
-            "_task_highlight": {
-                "_task_list": []
-            },
-            "_task_deleted": {
-                "_task_list": []
-            }
-        },
-        {
-            "_id": 3,
-            "_title": "45435345",
-            "_task_normal": {
-                "_task_list": []
+                "_task_list": [
+                    {
+                        "_id": 1,
+                        "_name": "task",
+                        "_subtasks": [],
+                        "_description": "",
+                        "_due_date": null,
+                        "_status": "Normal"
+                    },
+                    {
+                        "_id": 2,
+                        "_name": "taskerwer",
+                        "_subtasks": [],
+                        "_description": "",
+                        "_due_date": null,
+                        "_status": "Normal"
+                    }
+                ]
             },
             "_task_finished": {
                 "_task_list": []

@@ -248,7 +248,12 @@ class List(Movetask):
         return self._id
 
     def get_task(self, task_id):
-        for task in self.task_normal.task_list:
+        for task in (
+            self.task_normal.task_list
+            + self.task_finished.task_list
+            + self.task_highlight.task_list
+            + self.task_deleted.task_list
+        ):
             if task.id == task_id:
                 return task
 
@@ -263,7 +268,7 @@ class List(Movetask):
         task = self.get_task(task_id)
         task.description = description
 
-    def edit_task_due_date(self, due_date, task_id):
+    def edit_task_date(self, due_date, task_id):
         task = self.get_task(task_id)
         task.due_date = due_date
 
