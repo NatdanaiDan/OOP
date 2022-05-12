@@ -2,26 +2,9 @@
     "_user_list": [
         {
             "_id": 1,
-            "_title": "listtest1",
+            "_title": "test13123",
             "_task_normal": {
-                "_task_list": [
-                    {
-                        "_id": 1,
-                        "_name": "task",
-                        "_subtasks": [],
-                        "_description": "",
-                        "_due_date": null,
-                        "_status": "Normal"
-                    },
-                    {
-                        "_id": 2,
-                        "_name": "taskerwer",
-                        "_subtasks": [],
-                        "_description": "",
-                        "_due_date": null,
-                        "_status": "Normal"
-                    }
-                ]
+                "_task_list": []
             },
             "_task_finished": {
                 "_task_list": []

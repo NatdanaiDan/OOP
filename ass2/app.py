@@ -40,6 +40,13 @@ def get_data():
     return JSONResponse(content=data)
 
 
+@app.get("/get_tasklist")
+def get_tasklist(list_id: int):
+    jsonlist = user1.get_list(list_id)
+    jsonlist = json.dumps(jsonlist, indent=4, cls=EmployeeEncoder)
+    return JSONResponse(content=jsonlist)
+
+
 @app.get("/")
 def read_root():
     return "Connected to the server"
