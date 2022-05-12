@@ -150,3 +150,11 @@ def edit_subtask_status(list_id: int, task_id: int, subtask_id: int):
 def remove_subtask(list_id: int, task_id: int, subtask_id: int):
     user1.remove_subtask(list_id, task_id, subtask_id)
     save_to_json(user1)
+
+
+@app.edit("/edittask")
+def edit_subtask(name: str, date: str, description: str, list_id: int, task_id: int):
+    user1.edit_task_name(name, list_id, task_id)
+    user1.edit_task_date(date, list_id, task_id)
+    user1.edit_task_description(description, list_id, task_id)
+    save_to_json(user1)
