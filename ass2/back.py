@@ -5,15 +5,60 @@ class User:
     def create_list(self, title):
         self._user_list.append(List(title))
 
+    def get_list(self, list_id):
+        for list in self._user_list:
+            if list.id == list_id:
+                return list
+
+    def edit_tasklist_name(self, title, list_id):
+        list_return = self.get_list(list_id)
+        list_return.title = title
+
+    def add_task(self, name, list_id):
+        list_return = self.get_list(list_id)
+        list_return.add_task(name)
+
+    def edit_task_name(self, name, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.edit_task_name(name, task_id)
+
+    def edit_task_description(self, description, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.edit_task_description(description, task_id)
+
+    def edit_task_date(self, date, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.edit_task_date(date, task_id)
+
+    def move_to_task_delete(self, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.move_to_task_delete(task_id)
+
+    def move_to_task_finished(self, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.move_to_task_finished(task_id)
+
+    def move_to_task_normal(self, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.move_to_task_normal(task_id)
+
+    def move_to_task_highlight(self, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.move_to_task_highlight(task_id)
+
     @property
     def user_list(self):
         return self._user_list
 
 
 class Subtask:
+    id_subtask = 0
+
     def __init__(self, details):
+        self.id = Subtask.id_subtask
         self._details = details
         self._status_completed = False
+        Subtask.id_subtask += 1
 
     @property
     def details(self):
@@ -22,6 +67,10 @@ class Subtask:
     @details.setter
     def details(self, details):
         self._details = details
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def status_completed(self):
@@ -60,6 +109,14 @@ class Task:
         self._description = description
 
     @property
+    def due_date(self):
+        return self._due_date
+
+    @due_date.setter
+    def due_date(self, due_date):
+        self._due_date = due_date
+
+    @property
     def status(self):
         return self._status
 
@@ -75,14 +132,18 @@ class Task:
     def id(self):
         return self._id
 
+    def get_subtask(self, subtask_id):
+        for subtask in self._subtasks:
+            if subtask.id == subtask_id:
+                return subtask
+
     def add_subtask(self, detail):
         self._subtasks.append(Subtask(detail))
 
-    def remove_subtask(self, detail):
+    def remove_subtask(self, subtask_id):
         for subtask in self._subtasks:
-            if subtask.details == detail:
+            if subtask.id == subtask_id:
                 self._subtasks.remove(subtask)
-                break
 
 
 class Bucket:
@@ -186,8 +247,53 @@ class List(Movetask):
     def id(self):
         return self._id
 
+    def get_task(self, task_id):
+        for task in self.task_normal.task_list:
+            if task.id == task_id:
+                return task
+
     def add_task(self, name):
         self.task_normal.task_list.append(Task(name))
+
+    def edit_task_name(self, name, task_id):
+        task = self.get_task(task_id)
+        task.name = name
+
+    def edit_task_description(self, description, task_id):
+        task = self.get_task(task_id)
+        task.description = description
+
+    def edit_task_due_date(self, due_date, task_id):
+        task = self.get_task(task_id)
+        task.due_date = due_date
+
+    def move_to_task_deleted(self, task_id):
+        task = self.get_task(task_id)
+        self.move_to_task_deleted(task)
+
+    def move_to_task_finished(self, task_id):
+        task = self.get_task(task_id)
+        self.move_to_task_finished(task)
+
+    def move_to_task_highlight(self, task_id):
+        task = self.get_task(task_id)
+        self.move_to_task_highlight(task)
+
+    def move_to_task_normal(self, task_id):
+        task = self.get_task(task_id)
+        self.move_to_task_normal(task)
+
+    # def add_subtask(self, detail, task_id):
+    #     task = self.get_task(task_id)
+    #     task.add_subtask(detail)
+
+    # def edit_subtask_detail(self, detail, subtask_id, task_id):
+    #     task = self.get_task(task_id)
+    #     task.get_subtask(subtask_id).detail = detail
+
+    # def remove_subtask(self, subtask_id, task_id):
+    #     task = self.get_task(task_id)
+    #     task.remove_subtask(subtask_id)
 
 
 if __name__ == "__main__":
@@ -200,6 +306,11 @@ if __name__ == "__main__":
 
     user1 = User()
     user1.create_list("list1")
-
+    user1.edit_tasklist_name("test", 1)
     employeeJSONData = json.dumps(user1, indent=4, cls=EmployeeEncoder)
     print(employeeJSONData)
+
+    # studentObject = jsonpickle.decode(employeeJSONData)
+    # print("Object type is: ", type(studentObject))
+    # studentObject.create_list("list2")
+    # print(studentObject.user_list)
