@@ -34,9 +34,9 @@ class User:
         list_return = self.get_list(list_id)
         list_return.move_to_task_delete(task_id)
 
-    def move_to_task_finished(self, list_id, task_id):
+    def move_to_task_finish(self, list_id, task_id):
         list_return = self.get_list(list_id)
-        list_return.move_to_task_finished(task_id)
+        list_return.move_to_task_finish(task_id)
 
     def move_to_task_normal(self, list_id, task_id):
         list_return = self.get_list(list_id)
@@ -196,12 +196,12 @@ class Movetask:
         task.status = "Finished"
         self._task_finished.task_list.append(task)
 
-    def move_to_task_highlight(self, task):
+    def move_to_task_highlighted(self, task):
         self.get_where(task)
         task.status = "Highlight"
         self._task_highlight.task_list.append(task)
 
-    def move_to_task_normal(self, task):
+    def move_to_task_normaled(self, task):
         self.get_where(task)
         task.status = "Normal"
         self._task_normal.task_list.append(task)
@@ -272,21 +272,21 @@ class List(Movetask):
         task = self.get_task(task_id)
         task.due_date = due_date
 
-    def move_to_task_deleted(self, task_id):
+    def move_to_task_delete(self, task_id):
         task = self.get_task(task_id)
         self.move_to_task_deleted(task)
 
-    def move_to_task_finished(self, task_id):
+    def move_to_task_finish(self, task_id):
         task = self.get_task(task_id)
         self.move_to_task_finished(task)
 
     def move_to_task_highlight(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_highlight(task)
+        self.move_to_task_highlighted(task)
 
     def move_to_task_normal(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_normal(task)
+        self.move_to_task_normaled(task)
 
     # def add_subtask(self, detail, task_id):
     #     task = self.get_task(task_id)

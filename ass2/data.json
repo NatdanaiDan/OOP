@@ -2,24 +2,24 @@
     "_user_list": [
         {
             "_id": 1,
-            "_title": "test2",
+            "_title": "testtest",
             "_task_normal": {
-                "_task_list": [
-                    {
-                        "_id": 1,
-                        "_name": "testnew",
-                        "_subtasks": [],
-                        "_description": "tsueitheufskfse",
-                        "_due_date": null,
-                        "_status": "Normal"
-                    }
-                ]
+                "_task_list": []
             },
             "_task_finished": {
                 "_task_list": []
             },
             "_task_highlight": {
-                "_task_list": []
+                "_task_list": [
+                    {
+                        "_id": 1,
+                        "_name": "testawr",
+                        "_subtasks": [],
+                        "_description": "testiui",
+                        "_due_date": "22",
+                        "_status": "Highlight"
+                    }
+                ]
             },
             "_task_deleted": {
                 "_task_list": []

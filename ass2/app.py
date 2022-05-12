@@ -62,8 +62,8 @@ def add_list(name: str):
 
 
 @app.get("/edittasklistname")
-def edit_task_list_name(name: str, list_id: int):
-    user1.edit_task_list_name(name, list_id)
+def edit_tasklist_name(name: str, list_id: int):
+    user1.edit_tasklist_name(name, list_id)
     save_to_json(user1)
 
 
@@ -77,8 +77,8 @@ def add_task(name: str, list_id: int):
 
 
 @app.get("/edittaskdate")
-def edit_task_date(date: str, task_id: int):
-    user1.edit_task_date(date, task_id)
+def edit_task_date(due_date: str, list_id: int, task_id: int):
+    user1.edit_task_date(due_date, list_id, task_id)
     save_to_json(user1)
 
 
@@ -95,8 +95,8 @@ def edit_task_description(name: str, list_id: int, task_id: int):
 
 
 @app.get("/move_to_task_deleted")
-def move_to_task_delet(list_id: int, task_id: int):
-    user1.move_to_task_delet(list_id, task_id)
+def move_to_task_delete(list_id: int, task_id: int):
+    user1.move_to_task_delete(list_id, task_id)
     save_to_json(user1)
 
 
