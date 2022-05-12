@@ -1,29 +1,18 @@
 {
-    "_user_list": [
-        {
-            "_id": 1,
-            "_title": "ydrydry",
-            "_task_normal": {
-                "_task_list": [
-                    {
-                        "_id": 1,
-                        "_name": "werwerwer",
-                        "_subtasks": [],
-                        "_description": "234123u23781263y78123",
-                        "_due_date": "1223",
-                        "_status": "Normal"
-                    }
-                ]
-            },
-            "_task_finished": {
-                "_task_list": []
-            },
-            "_task_highlight": {
-                "_task_list": []
-            },
-            "_task_deleted": {
-                "_task_list": []
-            }
+    "_user_list": [{
+        "_id": 1,
+        "_title": "normal",
+        "_task_normal": {
+            "_task_list": []
+        },
+        "_task_finished": {
+            "_task_list": []
+        },
+        "_task_highlight": {
+            "_task_list": []
+        },
+        "_task_deleted": {
+            "_task_list": []
         }
-    ]
+    }]
 }
