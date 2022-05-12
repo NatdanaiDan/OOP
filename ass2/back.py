@@ -50,9 +50,17 @@ class User:
         list_return = self.get_list(list_id)
         list_return.add_subtask(name, task_id)
 
-    def edit_subtask_name(self, name, list_id, task_id, subtask_id):
+    def edit_subtask_detail(self, name, list_id, task_id, subtask_id):
         list_return = self.get_list(list_id)
-        list_return.edit_subtask_name(name, task_id, subtask_id)
+        list_return.edit_subtask_detail(name, task_id, subtask_id)
+
+    def edit_subtask_status(self, list_id, task_id, subtask_id):
+        list_return = self.get_list(list_id)
+        list_return.edit_subtask_status(task_id, subtask_id)
+
+    def remove_subtask(self, list_id, task_id, subtask_id):
+        list_return = self.get_list(list_id)
+        list_return.remove_subtask(task_id, subtask_id)
 
     @property
     def user_list(self):
@@ -60,10 +68,10 @@ class User:
 
 
 class Subtask:
-    id_subtask = 0
+    id_subtask = 1
 
     def __init__(self, details):
-        self.id = Subtask.id_subtask
+        self._id = Subtask.id_subtask
         self._details = details
         self._status_completed = False
         Subtask.id_subtask += 1
@@ -153,6 +161,14 @@ class Task:
             if subtask.id == subtask_id:
                 self._subtasks.remove(subtask)
 
+    def edit_subtask_detail(self, detail, subtask_id):
+        subtask = self.get_subtask(subtask_id)
+        subtask.details = detail
+
+    def edit_subtask_status(self, subtask_id):
+        subtask = self.get_subtask(subtask_id)
+        subtask.change_status()
+
 
 class Bucket:
     def __init__(self):
@@ -194,22 +210,22 @@ class Movetask:
         elif where == "Deleted":
             self.task_deleted.remove_task(task)
 
-    def move_to_task_deleted(self, task):
+    def move_to_task_delete(self, task):
         self.get_where(task)
         task.status = "Deleted"
         self._task_deleted.task_list.append(task)
 
-    def move_to_task_finished(self, task):
+    def move_to_task_finish(self, task):
         self.get_where(task)
         task.status = "Finished"
         self._task_finished.task_list.append(task)
 
-    def move_to_task_highlighted(self, task):
+    def move_to_task_highlight(self, task):
         self.get_where(task)
         task.status = "Highlight"
         self._task_highlight.task_list.append(task)
 
-    def move_to_task_normaled(self, task):
+    def move_to_task_normal(self, task):
         self.get_where(task)
         task.status = "Normal"
         self._task_normal.task_list.append(task)
@@ -282,19 +298,19 @@ class List(Movetask):
 
     def move_to_task_delete(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_deleted(task)
+        super().move_to_task_delete(task)
 
     def move_to_task_finish(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_finished(task)
+        super().move_to_task_finish(task)
 
     def move_to_task_highlight(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_highlighted(task)
+        super().move_to_task_highlight(task)
 
     def move_to_task_normal(self, task_id):
         task = self.get_task(task_id)
-        self.move_to_task_normaled(task)
+        super().move_to_task_normal(task)
 
     def add_subtask(self, detail, task_id):
         task = self.get_task(task_id)
@@ -303,6 +319,14 @@ class List(Movetask):
     def edit_subtask_detail(self, detail, subtask_id, task_id):
         task = self.get_task(task_id)
         task.edit_subtask_detail(detail, subtask_id)
+
+    def edit_subtask_status(self, subtask_id, task_id):
+        task = self.get_task(task_id)
+        task.edit_subtask_status(subtask_id)
+
+    def remove_subtask(self, subtask_id, task_id):
+        task = self.get_task(task_id)
+        task.remove_subtask(subtask_id)
 
 
 if __name__ == "__main__":

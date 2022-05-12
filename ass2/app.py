@@ -134,15 +134,15 @@ def add_subtask(name: str, list_id: int, task_id: int):
     save_to_json(user1)
 
 
-@app.get("/editsubtaskname")
-def edit_subtask_name(name: str, list_id: int, task_id: int, subtask_id: int):
-    user1.edit_subtask_name(name, list_id, task_id, subtask_id)
+@app.get("/editsubtaskdetail")
+def edit_subtask_detail(name: str, list_id: int, task_id: int, subtask_id: int):
+    user1.edit_subtask_detail(name, list_id, task_id, subtask_id)
     save_to_json(user1)
 
 
 @app.get("/editsubtaskstatus")
-def edit_subtask_status(status: str, list_id: int, task_id: int, subtask_id: int):
-    user1.edit_subtask_status(status, list_id, task_id, subtask_id)
+def edit_subtask_status(list_id: int, task_id: int, subtask_id: int):
+    user1.edit_subtask_status(list_id, task_id, subtask_id)
     save_to_json(user1)
 
 
