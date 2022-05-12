@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 import back
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.encoders import jsonable_encoder
 
 origins = ["*"]
 
@@ -43,8 +44,14 @@ def get_data():
 @app.get("/get_tasklist")
 def get_tasklist(list_id: int):
     jsonlist = user1.get_list(list_id)
-    jsonlist = json.dumps(jsonlist, indent=4, cls=EmployeeEncoder)
-    return JSONResponse(content=jsonlist)
+    return JSONResponse(content=jsonable_encoder(jsonlist))
+
+
+@app.get("/get_subtask")
+def get_subtask(list_id: int, task_id: int):
+    list = user1.get_list(list_id)
+    jsontask = list.get_task(task_id)
+    return JSONResponse(content=jsonable_encoder(jsontask))
 
 
 @app.get("/")

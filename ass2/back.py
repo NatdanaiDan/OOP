@@ -46,6 +46,14 @@ class User:
         list_return = self.get_list(list_id)
         list_return.move_to_task_highlight(task_id)
 
+    def add_subtask(self, name, list_id, task_id):
+        list_return = self.get_list(list_id)
+        list_return.add_subtask(name, task_id)
+
+    def edit_subtask_name(self, name, list_id, task_id, subtask_id):
+        list_return = self.get_list(list_id)
+        list_return.edit_subtask_name(name, task_id, subtask_id)
+
     @property
     def user_list(self):
         return self._user_list
@@ -288,17 +296,13 @@ class List(Movetask):
         task = self.get_task(task_id)
         self.move_to_task_normaled(task)
 
-    # def add_subtask(self, detail, task_id):
-    #     task = self.get_task(task_id)
-    #     task.add_subtask(detail)
+    def add_subtask(self, detail, task_id):
+        task = self.get_task(task_id)
+        task.add_subtask(detail)
 
-    # def edit_subtask_detail(self, detail, subtask_id, task_id):
-    #     task = self.get_task(task_id)
-    #     task.get_subtask(subtask_id).detail = detail
-
-    # def remove_subtask(self, subtask_id, task_id):
-    #     task = self.get_task(task_id)
-    #     task.remove_subtask(subtask_id)
+    def edit_subtask_detail(self, detail, subtask_id, task_id):
+        task = self.get_task(task_id)
+        task.edit_subtask_detail(detail, subtask_id)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
     "_user_list": [
         {
             "_id": 1,
-            "_title": "testtest",
+            "_title": "test",
             "_task_normal": {
                 "_task_list": []
             },
@@ -10,16 +10,7 @@
                 "_task_list": []
             },
             "_task_highlight": {
-                "_task_list": [
-                    {
-                        "_id": 1,
-                        "_name": "testawr",
-                        "_subtasks": [],
-                        "_description": "testiui",
-                        "_due_date": "22",
-                        "_status": "Highlight"
-                    }
-                ]
+                "_task_list": []
             },
             "_task_deleted": {
                 "_task_list": []
