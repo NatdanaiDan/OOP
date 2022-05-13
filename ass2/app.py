@@ -83,45 +83,15 @@ def add_task(name: str, list_id: int):
     save_to_json(user1)
 
 
-@app.get("/edittaskdate")
-def edit_task_date(due_date: str, list_id: int, task_id: int):
-    user1.edit_task_date(due_date, list_id, task_id)
+@app.get("/edittask")
+def edit_subtask(name: str, date: str, description: str, list_id: int, task_id: int):
+    user1.edit_task(name, date, description, list_id, task_id)
     save_to_json(user1)
 
 
-@app.get("/edittaskname")
-def edit_task_name(name: str, list_id: int, task_id: int):
-    user1.edit_task_name(name, list_id, task_id)
-    save_to_json(user1)
-
-
-@app.get("/edittaskdescription")
-def edit_task_description(name: str, list_id: int, task_id: int):
-    user1.edit_task_description(name, list_id, task_id)
-    save_to_json(user1)
-
-
-@app.get("/move_to_task_deleted")
-def move_to_task_delete(list_id: int, task_id: int):
-    user1.move_to_task_delete(list_id, task_id)
-    save_to_json(user1)
-
-
-@app.get("/move_to_task_finished")
-def move_to_task_finish(list_id: int, task_id: int):
-    user1.move_to_task_finish(list_id, task_id)
-    save_to_json(user1)
-
-
-@app.get("/move_to_task_normal")
-def move_to_task_normal(list_id: int, task_id: int):
-    user1.move_to_task_normal(list_id, task_id)
-    save_to_json(user1)
-
-
-@app.get("/move_to_task_highlight")
-def move_to_task_highlight(list_id: int, task_id: int):
-    user1.move_to_task_highlight(list_id, task_id)
+@app.get("/move_to_task")
+def move_to_task(list_id: int, task_id: int, destination: str):
+    user1.move_to_task(list_id, task_id, destination)
     save_to_json(user1)
 
 
@@ -146,15 +116,7 @@ def edit_subtask_status(list_id: int, task_id: int, subtask_id: int):
     save_to_json(user1)
 
 
-@app.get("/removesubtask")
-def remove_subtask(list_id: int, task_id: int, subtask_id: int):
-    user1.remove_subtask(list_id, task_id, subtask_id)
-    save_to_json(user1)
-
-
-@app.get("/edittask")
-def edit_subtask(name: str, date: str, description: str, list_id: int, task_id: int):
-    user1.edit_task_name(name, list_id, task_id)
-    user1.edit_task_date(date, list_id, task_id)
-    user1.edit_task_description(description, list_id, task_id)
-    save_to_json(user1)
+# @app.get("/removesubtask")
+# def remove_subtask(list_id: int, task_id: int, subtask_id: int):
+#     user1.remove_subtask(list_id, task_id, subtask_id)
+#     save_to_json(user1)

@@ -7,33 +7,13 @@ class All_command_front:
         list_return = self.get_list(list_id)
         list_return.add_task(name)
 
-    def edit_task_name(self, name, list_id, task_id):
+    def edit_task(self, name, date, description, list_id, task_id):
         list_return = self.get_list(list_id)
-        list_return.edit_task_name(name, task_id)
+        list_return.edit_task(name, date, description, task_id)
 
-    def edit_task_description(self, description, list_id, task_id):
+    def move_to_task(self, list_id, task_id, destination):
         list_return = self.get_list(list_id)
-        list_return.edit_task_description(description, task_id)
-
-    def edit_task_date(self, date, list_id, task_id):
-        list_return = self.get_list(list_id)
-        list_return.edit_task_date(date, task_id)
-
-    def move_to_task_delete(self, list_id, task_id):
-        list_return = self.get_list(list_id)
-        list_return.move_to_task_delete(task_id)
-
-    def move_to_task_finish(self, list_id, task_id):
-        list_return = self.get_list(list_id)
-        list_return.move_to_task_finish(task_id)
-
-    def move_to_task_normal(self, list_id, task_id):
-        list_return = self.get_list(list_id)
-        list_return.move_to_task_normal(task_id)
-
-    def move_to_task_highlight(self, list_id, task_id):
-        list_return = self.get_list(list_id)
-        list_return.move_to_task_highlight(task_id)
+        list_return.move_to_task(task_id, destination)
 
     def add_subtask(self, name, list_id, task_id):
         list_return = self.get_list(list_id)
@@ -47,23 +27,17 @@ class All_command_front:
         list_return = self.get_list(list_id)
         list_return.edit_subtask_status_signal(task_id, subtask_id)
 
-    def remove_subtask(self, list_id, task_id, subtask_id):
-        list_return = self.get_list(list_id)
-        list_return.remove_subtask_signal(task_id, subtask_id)
+    # def remove_subtask(self, list_id, task_id, subtask_id):
+    #     list_return = self.get_list(list_id)
+    #     list_return.remove_subtask_signal(task_id, subtask_id)
 
 
 class TaskAction:
-    def edit_task_name(self, name, task_id):
+    def edit_task(self, name, date, description, task_id):
         task = self.get_task(task_id)
         task.name = name
-
-    def edit_task_description(self, description, task_id):
-        task = self.get_task(task_id)
+        task.due_date = date
         task.description = description
-
-    def edit_task_date(self, due_date, task_id):
-        task = self.get_task(task_id)
-        task.due_date = due_date
 
 
 class SubtaskAction:
@@ -91,10 +65,10 @@ class SubtaskAction:
         task = self.get_task(task_id)
         task.remove_subtask(subtask_id)
 
-    def remove_subtask(self, subtask_id):
-        for subtask in self._subtasks:
-            if subtask.id == subtask_id:
-                self._subtasks.remove(subtask)
+    # def remove_subtask(self, subtask_id):
+    #     for subtask in self.subtasks:
+    #         if subtask.id == subtask_id:
+    #             self.subtasks.remove(subtask)
 
 
 class Movetask:
@@ -111,22 +85,7 @@ class Movetask:
             self.task_deleted.remove_task(task)
         return task
 
-    def move_to_task_delete(self, task_id):
+    def move_to_task(self, task_id, destination, dict):
         task = self.get_where(task_id)
-        task.status = "Deleted"
-        self._task_deleted.task_list.append(task)
-
-    def move_to_task_finish(self, task_id):
-        task = self.get_where(task_id)
-        task.status = "Finished"
-        self._task_finished.task_list.append(task)
-
-    def move_to_task_highlight(self, task_id):
-        task = self.get_where(task_id)
-        task.status = "Highlight"
-        self._task_highlight.task_list.append(task)
-
-    def move_to_task_normal(self, task_id):
-        task = self.get_where(task_id)
-        task.status = "Normal"
-        self._task_normal.task_list.append(task)
+        task.status = destination
+        dict[destination].task_list.append(task)

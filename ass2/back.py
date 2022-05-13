@@ -99,6 +99,15 @@ class List(Movetask, TaskAction, SubtaskAction):
     def add_task(self, name):
         self.task_normal.task_list.append(Task(name))
 
+    def move_to_task(self, task_id, destination):
+        dict = {
+            "Normal": self.task_normal,
+            "Finished": self.task_finished,
+            "Highlight": self.task_highlight,
+            "Deleted": self.task_deleted,
+        }
+        super().move_to_task(task_id, destination, dict)
+
 
 class Task(SubtaskAction):
     task_id = 1
