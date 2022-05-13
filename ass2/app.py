@@ -29,16 +29,15 @@ class EmployeeEncoder(JSONEncoder):
 
 
 def save_to_json(obj):
-    with open("data.json", "w") as f:
-        json.dump(obj, f, indent=4, cls=EmployeeEncoder)
+    pass
 
 
 @app.get("/get_data")
 def get_data():
-    f = open("data.json")
-    data = json.load(f)
-    f.close()
-    return JSONResponse(content=data)
+    # f = open("data.json")
+    # data = json.load(f)
+    # f.close()
+    return JSONResponse(content=jsonable_encoder(user1))
 
 
 @app.get("/get_tasklist")
