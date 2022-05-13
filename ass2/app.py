@@ -16,20 +16,20 @@ app.add_middleware(
 )
 
 # import jsonpickle
-import json
-from json import JSONEncoder
+# import json
+# from json import JSONEncoder
 
 
 user1 = back.User()
 
 
-class EmployeeEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__
+# class EmployeeEncoder(JSONEncoder):
+#     def default(self, o):
+#         return o.__dict__
 
 
-def save_to_json(obj):
-    pass
+# def save_to_json(obj):
+#     pass
 
 
 @app.get("/get_data")
@@ -64,13 +64,13 @@ def read_root():
 @app.get("/createlist")
 def add_list(name: str):
     user1.create_list(name)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 @app.get("/edittasklistname")
 def edit_tasklist_name(name: str, list_id: int):
     user1.edit_tasklist_name(name, list_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 ### Task
@@ -79,19 +79,19 @@ def edit_tasklist_name(name: str, list_id: int):
 @app.get("/addtask")
 def add_task(name: str, list_id: int):
     user1.add_task(name, list_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 @app.get("/edittask")
 def edit_subtask(name: str, date: str, description: str, list_id: int, task_id: int):
     user1.edit_task(name, date, description, list_id, task_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 @app.get("/move_to_task")
 def move_to_task(list_id: int, task_id: int, destination: str):
     user1.move_to_task(list_id, task_id, destination)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 ### Subtask
@@ -100,22 +100,22 @@ def move_to_task(list_id: int, task_id: int, destination: str):
 @app.get("/addsubtask")
 def add_subtask(name: str, list_id: int, task_id: int):
     user1.add_subtask(name, list_id, task_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 @app.get("/editsubtaskdetail")
 def edit_subtask_detail(name: str, list_id: int, task_id: int, subtask_id: int):
     user1.edit_subtask_detail(name, list_id, task_id, subtask_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 @app.get("/editsubtaskstatus")
 def edit_subtask_status(list_id: int, task_id: int, subtask_id: int):
     user1.edit_subtask_status(list_id, task_id, subtask_id)
-    save_to_json(user1)
+    # save_to_json(user1)
 
 
 # @app.get("/removesubtask")
 # def remove_subtask(list_id: int, task_id: int, subtask_id: int):
 #     user1.remove_subtask(list_id, task_id, subtask_id)
-#     save_to_json(user1)
+#     #save_to_json(user1)

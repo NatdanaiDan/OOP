@@ -45,7 +45,12 @@ class SubtaskAction:
         task = self.get_task(task_id)
         task.add_subtask(detail)
 
-    def edit_subtask_detail_signal(self, detail, subtask_id, task_id):
+    def edit_subtask_detail_signal(
+        self,
+        detail,
+        task_id,
+        subtask_id,
+    ):
         task = self.get_task(task_id)
         task.edit_subtask_detail(detail, subtask_id)
 
@@ -53,7 +58,7 @@ class SubtaskAction:
         subtask = self.get_subtask(subtask_id)
         subtask.details = detail
 
-    def edit_subtask_status_signal(self, subtask_id, task_id):
+    def edit_subtask_status_signal(self, task_id, subtask_id):
         task = self.get_task(task_id)
         task.edit_subtask_status(subtask_id)
 
