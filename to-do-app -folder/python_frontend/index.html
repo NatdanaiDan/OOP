@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="./css/mystyle.css" />
+    <script src="./js/call_api.js"></script>
+    <title>Todo-App</title>
+</head>
+<!-- main -->
+
+<body onload="main()">
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+                <div class="d-flex flex-column min-vh-100 control-center">
+                    <div class="row user-zone">
+                        <div class="user-img">
+                            <div class="img-crop"><img src="./img/logo.png" alt="" /></div>
+                            <a href="#" onclick="main()">
+                                <h1>TODO APP</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list-use">
+                        <ul class="sum-li" id="todo_list"></ul>
+                    </div>
+                    <input class="form-control" type="text" name="task_list_name" id="task_list_name" onkeypress="add_tasklist(event)" placeholder="task list name" />
+                    <div class="bottom-sidebar">
+                        <div class="bottom-content" onclick="get_finish_task()">
+                            <img src="./img/check.png" alt="" />
+                            <h1>finish task</h1>
+                        </div>
+                        <div class="bottom-content" onclick="get_delete_task()">
+                            <img src="./img/bin.png" alt="" />
+                            <h1>delete task</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col py-3">
+                <div class="header-todo">
+                    <!-- <img src="" alt=""> -->
+                    <h1 id="title_task"></h1>
+                </div>
+                <div class="col py-3">
+                    <ul class="group-task" id="task_todo"></ul>
+                    <input class="form-control" type="text" name="task_input" id="task_input" onkeypress="add_task_in_task_list(event)" />
+                </div>
+
+                <div class="edit-zone" id="task_edit" hidden>
+                    <div class="first-edit-zone">
+                        <input type="hidden" name="edit_list_id" id="edit_list_id" value="" />
+                        <input type="hidden" name="edit_task_id" id="edit_task_id" value="" />
+                        <div class="row" id="show_hightlight">
+                            <input type="text" placeholder="Task" class="task form-control" id="task_name" value="" />
+                            <a href="#" id="star_highlight"><img src="./img/star.png" alt="" style="max-width: 30px;"></a>
+                        </div>
+                        <div class="sub-task" id="edit_subtask">
+                            <input class="form-control" type="text" placeholder="Type sub task (optional)" name="add_subtask" id="add_subtask" onkeypress="add_sub_task_to_task(event)" />
+                        </div>
+                    </div>
+                    <div class="second-edit-zone">
+                        <div class="input-calardar">
+                            <input type="text" id="datepicker" class="datepicker" />
+                            <i class="fa-solid fa-calendar"></i>
+                        </div>
+                        <textarea cols="30" rows="10" placeholder="add task detail" id="task_detail"> </textarea>
+                        <div class="botton-set">
+                            <input type="hidden" name="is_highlight" id="is_highlight">
+                            <input type="button" onclick="set_highlight()" value="highlight" />
+                            <input type="button" onclick="save_task()" value="save" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/0b376b7068.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="./js/main-script.js"></script>
+
+</html>
