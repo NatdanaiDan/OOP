@@ -1,0 +1,2 @@
+1. cmd "cd ไปที่ back with fastapi แล้วทำการ เปิดด้วย uvicorn app:app --reload"
+2.     เปิด index.html liveserver ภายใน Folder "python_frontend"

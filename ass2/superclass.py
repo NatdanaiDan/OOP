@@ -66,9 +66,9 @@ class SubtaskAction:
         subtask = self.get_subtask(subtask_id)
         subtask.change_status()
 
-    def remove_subtask_signal(self, subtask_id, task_id):
-        task = self.get_task(task_id)
-        task.remove_subtask(subtask_id)
+    # def remove_subtask_signal(self, subtask_id, task_id):
+    #     task = self.get_task(task_id)
+    #     task.remove_subtask(subtask_id)
 
     # def remove_subtask(self, subtask_id):
     #     for subtask in self.subtasks:
