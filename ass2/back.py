@@ -18,96 +18,6 @@ class User(All_command_front):
         return self._user_list
 
 
-class Subtask:
-    id_subtask = 1
-
-    def __init__(self, details):
-        self._id = Subtask.id_subtask
-        self._details = details
-        self._status_completed = False
-        Subtask.id_subtask += 1
-
-    @property
-    def details(self):
-        return self._details
-
-    @details.setter
-    def details(self, details):
-        self._details = details
-
-    @property
-    def id(self):
-        return self._id
-
-    @property
-    def status_completed(self):
-        return self._status_completed
-
-    def change_status(self):
-        self._status_completed = not self._status_completed
-
-
-class Task(SubtaskAction):
-    task_id = 1
-
-    def __init__(self, name):
-        self._id = Task.task_id
-        self._name = name
-        self._subtasks = []
-        self._description = ""
-        self._due_date = None
-        self._status = "Normal"
-        Task.task_id += 1
-
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        self._name = name
-
-    @property
-    def description(self):
-        return self._description
-
-    @description.setter
-    def description(self, description):
-        self._description = description
-
-    @property
-    def due_date(self):
-        return self._due_date
-
-    @due_date.setter
-    def due_date(self, due_date):
-        self._due_date = due_date
-
-    @property
-    def status(self):
-        return self._status
-
-    @status.setter
-    def status(self, status):
-        self._status = status
-
-    @property
-    def subtasks(self):
-        return self._subtasks
-
-    @property
-    def id(self):
-        return self._id
-
-    def get_subtask(self, subtask_id):
-        for subtask in self._subtasks:
-            if subtask.id == subtask_id:
-                return subtask
-
-    def add_subtask(self, detail):
-        self._subtasks.append(Subtask(detail))
-
-
 class Bucket:
     def __init__(self):
         self._task_list = []
@@ -188,6 +98,96 @@ class List(Movetask, TaskAction, SubtaskAction):
 
     def add_task(self, name):
         self.task_normal.task_list.append(Task(name))
+
+
+class Task(SubtaskAction):
+    task_id = 1
+
+    def __init__(self, name):
+        self._id = Task.task_id
+        self._name = name
+        self._subtasks = []
+        self._description = ""
+        self._due_date = None
+        self._status = "Normal"
+        Task.task_id += 1
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @property
+    def description(self):
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        self._description = description
+
+    @property
+    def due_date(self):
+        return self._due_date
+
+    @due_date.setter
+    def due_date(self, due_date):
+        self._due_date = due_date
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        self._status = status
+
+    @property
+    def subtasks(self):
+        return self._subtasks
+
+    @property
+    def id(self):
+        return self._id
+
+    def get_subtask(self, subtask_id):
+        for subtask in self._subtasks:
+            if subtask.id == subtask_id:
+                return subtask
+
+    def add_subtask(self, detail):
+        self._subtasks.append(Subtask(detail))
+
+
+class Subtask:
+    id_subtask = 1
+
+    def __init__(self, details):
+        self._id = Subtask.id_subtask
+        self._details = details
+        self._status_completed = False
+        Subtask.id_subtask += 1
+
+    @property
+    def details(self):
+        return self._details
+
+    @details.setter
+    def details(self, details):
+        self._details = details
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def status_completed(self):
+        return self._status_completed
+
+    def change_status(self):
+        self._status_completed = not self._status_completed
 
 
 if __name__ == "__main__":
